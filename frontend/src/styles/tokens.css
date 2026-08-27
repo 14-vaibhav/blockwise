@@ -1,0 +1,109 @@
+/* Ported from DESIGN.md - the same palette/type/hatch rules app_studio.py
+   uses, so this reads as the same product rather than a bolted-on tool.
+   measured/modelled are reserved: measured never renders model output,
+   modelled never renders a measurement (DESIGN.md section 9, rule 1). */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --paper: #e9eae5;
+  --paper2: #dfe1da;
+  --ink: #16181a;
+  --ink60: #5a5f5c;
+  --rule: #c3c5bd;
+  --measured: #1b4b52;
+  --modelled: #5e2b54;
+  --amber: #9c6b1e;
+  --thermal-cool: #1b4b52;
+  --thermal-warm: #8c2f1e;
+  --font-display: "Archivo", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+:root[data-theme="dark"] {
+  --paper: #15191d;
+  --paper2: #1e2329;
+  --ink: #ecede7;
+  --ink60: #9aa39c;
+  --rule: #343b41;
+  --measured: #5fd3de;
+  --modelled: #e39bd6;
+  --amber: #e6ae4d;
+  --thermal-cool: #3e93a0;
+  --thermal-warm: #d97a54;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink60);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.flag {
+  border-left: 3px solid var(--amber);
+  background: rgba(156, 107, 30, 0.08);
+  padding: 0.5rem 0.7rem;
+  margin: 0.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+/* the signature: solid measured, 45deg hatched modelled */
+.swatch {
+  display: inline-block;
+  width: 22px;
+  height: 8px;
+  margin-right: 0.35rem;
+  border: 1px solid var(--ink);
+  vertical-align: middle;
+}
+.sw-measured {
+  background: var(--measured);
+}
+.sw-modelled {
+  background: repeating-linear-gradient(
+      45deg,
+      var(--modelled) 0 3px,
+      transparent 3px 6px
+    ),
+    var(--paper);
+}
+
+button {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}

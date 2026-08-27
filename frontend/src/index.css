@@ -1,0 +1,16 @@
+@import "leaflet/dist/leaflet.css";
+@import "leaflet-draw/dist/leaflet.draw.css";
+@import "./styles/tokens.css";
+
+.hover-info {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--paper2);
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.55rem;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--ink);
+  pointer-events: none;
+}
