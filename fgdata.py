@@ -31,9 +31,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.environ["FORTYGUARD_API_KEY"]
+API_KEY = os.environ.get("FORTYGUARD_API_KEY", "")
 BASE = "https://api.fortyguard.com/v1"
-HEADERS = {"api-key": API_KEY, "Content-Type": "application/json"}
+
+
+def _headers():
+    if not API_KEY:
+        raise RuntimeError("FORTYGUARD_API_KEY is not set")
+    return {"api-key": API_KEY, "Content-Type": "application/json"}
 
 GRANULARITY = 100          # metres. allowed: 60, 80, 100
 # Relative to this file, not the process cwd, so cache/ resolves the same
@@ -134,7 +139,7 @@ def fetch_tiles(aoi, date=None, granularity=GRANULARITY):
     """Submit a heatmap job, poll until complete. Returns the tile list."""
     date = date or previous_day()
 
-    r = requests.post(f"{BASE}/heatmap", headers=HEADERS, json={
+    r = requests.post(f"{BASE}/heatmap", headers=_headers(), json={
         "polygon_aoi": aoi,
         "date_time": {"start_date": date, "filter_type": 3},
         "granularity": granularity,
@@ -144,7 +149,7 @@ def fetch_tiles(aoi, date=None, granularity=GRANULARITY):
 
     for _ in range(60):
         d = requests.get(f"{BASE}/status/{aid}",
-                         headers=HEADERS, timeout=60).json().get("data", {})
+                         headers=_headers(), timeout=60).json().get("data", {})
         status = d.get("status")
         if status == "Completed":
             return d["result"]["map_data"]["features"]
