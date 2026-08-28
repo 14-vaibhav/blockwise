@@ -1,12 +1,8 @@
-streamlit
 numpy
 scipy
-plotly
 requests
 python-dotenv
 pytest
-folium
-streamlit-folium
 fastapi
 uvicorn[standard]
 httpx

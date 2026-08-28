@@ -23,6 +23,7 @@ import math
 import os
 import pathlib
 import re
+import tempfile
 import time
 from datetime import datetime, timedelta
 
@@ -36,7 +37,10 @@ BASE = "https://api.fortyguard.com/v1"
 HEADERS = {"api-key": API_KEY, "Content-Type": "application/json"}
 
 GRANULARITY = 100          # metres. allowed: 60, 80, 100
-CACHE = pathlib.Path("cache")
+# Vercel's filesystem is read-only outside /tmp - fall back there when
+# deployed (VERCEL is set by the platform at runtime).
+CACHE = (pathlib.Path(tempfile.gettempdir()) / "blockwise_cache"
+         if os.environ.get("VERCEL") else pathlib.Path("cache"))
 
 # Curated quick-pick examples, pre-cached for a fast first load. Not the only
 # selectable locations - geocode_us() below resolves any US place name.

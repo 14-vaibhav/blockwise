@@ -13,7 +13,9 @@ Roof albedo, paving type and tree species are still assumptions. Say so.
 """
 
 import json
+import os
 import pathlib
+import tempfile
 import time
 
 import numpy as np
@@ -22,7 +24,10 @@ import requests
 import engine as E
 
 OVERPASS = "https://overpass-api.de/api/interpreter"
-CACHE = pathlib.Path("cache")
+# Vercel's filesystem is read-only outside /tmp - fall back there when
+# deployed (VERCEL is set by the platform at runtime).
+CACHE = (pathlib.Path(tempfile.gettempdir()) / "blockwise_cache"
+         if os.environ.get("VERCEL") else pathlib.Path("cache"))
 
 # Overpass's usage policy rejects anonymous requests with no User-Agent
 # (HTTP 406). A descriptive one identifying the app is required, not optional.
