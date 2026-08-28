@@ -1,0 +1,14 @@
+{
+  "n_tiles": 72,
+  "peak_c": 27.210566666666665,
+  "low_c": 17.856830555555558,
+  "daily_mean_c": 22.40287083333333,
+  "peak_spread": 1.0182000000000002,
+  "peak_range": [
+    26.8049,
+    27.8231
+  ],
+  "location": "Manhattan, NY (polygon test)",
+  "shape_label": "polygon_73216",
+  "date": "2026-08-25"
+}

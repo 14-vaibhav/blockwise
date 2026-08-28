@@ -1,0 +1,14 @@
+{
+  "n_tiles": 30,
+  "peak_c": 32.06,
+  "low_c": 20.17,
+  "daily_mean_c": 27.64,
+  "peak_spread": 0.0,
+  "peak_range": [
+    32.06,
+    32.06
+  ],
+  "location": "35.0455, -82.0934",
+  "shape_label": "600m_square",
+  "date": "2026-08-23"
+}

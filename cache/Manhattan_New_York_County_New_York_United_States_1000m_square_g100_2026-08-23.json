@@ -1,0 +1,14 @@
+{
+  "n_tiles": 76,
+  "peak_c": 27.57806842105263,
+  "low_c": 20.651594736842103,
+  "daily_mean_c": 24.555943421052632,
+  "peak_spread": 0.9765999999999977,
+  "peak_range": [
+    27.2923,
+    28.2689
+  ],
+  "location": "Manhattan, New York County, New York, United States",
+  "shape_label": "1000m_square",
+  "date": "2026-08-23"
+}

@@ -1,0 +1,14 @@
+{
+  "n_tiles": 79,
+  "peak_c": 42.03,
+  "low_c": 32.596198734177214,
+  "daily_mean_c": 37.705277215189874,
+  "peak_spread": 0.0073999999999969646,
+  "peak_range": [
+    42.0283,
+    42.0357
+  ],
+  "location": "Phoenix, AZ",
+  "shape_label": "1000m_square",
+  "date": "2026-08-25"
+}

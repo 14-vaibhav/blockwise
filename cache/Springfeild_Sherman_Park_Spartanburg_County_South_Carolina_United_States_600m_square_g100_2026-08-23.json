@@ -1,0 +1,14 @@
+{
+  "n_tiles": 24,
+  "peak_c": 32.68,
+  "low_c": 19.84,
+  "daily_mean_c": 28.0678625,
+  "peak_spread": 0.0,
+  "peak_range": [
+    32.68,
+    32.68
+  ],
+  "location": "Springfeild, Sherman Park, Spartanburg County, South Carolina, United States",
+  "shape_label": "600m_square",
+  "date": "2026-08-23"
+}

@@ -1,0 +1,14 @@
+{
+  "n_tiles": 90,
+  "peak_c": 37.6,
+  "low_c": 25.86,
+  "daily_mean_c": 31.73898666666667,
+  "peak_spread": 0.0,
+  "peak_range": [
+    37.6,
+    37.6
+  ],
+  "location": "Austin, Travis County, Texas, United States",
+  "size_m": 1000,
+  "date": "2024-07-15"
+}

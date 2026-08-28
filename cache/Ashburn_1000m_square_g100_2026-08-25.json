@@ -1,0 +1,14 @@
+{
+  "n_tiles": 101,
+  "peak_c": 28.522714851485148,
+  "low_c": 15.076760396039603,
+  "daily_mean_c": 22.116950495049505,
+  "peak_spread": 0.4464000000000006,
+  "peak_range": [
+    28.4233,
+    28.8697
+  ],
+  "location": "Ashburn",
+  "shape_label": "1000m_square",
+  "date": "2026-08-25"
+}

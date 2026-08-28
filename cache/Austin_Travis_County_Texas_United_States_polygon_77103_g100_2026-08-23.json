@@ -1,0 +1,14 @@
+{
+  "n_tiles": 38,
+  "peak_c": 39.1663,
+  "low_c": 26.92521052631579,
+  "daily_mean_c": 35.38656052631579,
+  "peak_spread": 0.30049999999999955,
+  "peak_range": [
+    38.9889,
+    39.2894
+  ],
+  "location": "Austin, Travis County, Texas, United States",
+  "shape_label": "polygon_77103",
+  "date": "2026-08-23"
+}

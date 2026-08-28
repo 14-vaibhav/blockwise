@@ -1,0 +1,14 @@
+{
+  "n_tiles": 6,
+  "peak_c": 28.47865,
+  "low_c": 15.867116666666666,
+  "daily_mean_c": 23.27563333333333,
+  "peak_spread": 0.23110000000000142,
+  "peak_range": [
+    28.3628,
+    28.5939
+  ],
+  "location": "Springfield, Sangamon County, Illinois, United States",
+  "shape_label": "polygon_8143",
+  "date": "2026-08-23"
+}

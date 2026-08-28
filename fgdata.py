@@ -23,7 +23,6 @@ import math
 import os
 import pathlib
 import re
-import tempfile
 import time
 from datetime import datetime, timedelta
 
@@ -37,10 +36,11 @@ BASE = "https://api.fortyguard.com/v1"
 HEADERS = {"api-key": API_KEY, "Content-Type": "application/json"}
 
 GRANULARITY = 100          # metres. allowed: 60, 80, 100
-# Vercel's filesystem is read-only outside /tmp - fall back there when
-# deployed (VERCEL is set by the platform at runtime).
-CACHE = (pathlib.Path(tempfile.gettempdir()) / "blockwise_cache"
-         if os.environ.get("VERCEL") else pathlib.Path("cache"))
+# Relative to this file, not the process cwd, so cache/ resolves the same
+# way locally and inside a Vercel function bundle. Vercel's filesystem is
+# read-only outside /tmp - see get_plot()'s try/except around every write;
+# a pre-warmed, committed cache/ still serves reads there just fine.
+CACHE = pathlib.Path(__file__).resolve().parent / "cache"
 
 # Curated quick-pick examples, pre-cached for a fast first load. Not the only
 # selectable locations - geocode_us() below resolves any US place name.
@@ -80,8 +80,12 @@ def previous_day():
     FortyGuard is queried for a single day (filter_type 3). Default to
     yesterday relative to the server's local date - "today" is still an
     incomplete day, so it is never a meaningful single-day snapshot.
+
+    BLOCKWISE_DEMO_DATE pins this to a fixed date instead - without it, a
+    cache warmed today silently misses the moment the calendar rolls over.
     """
-    return (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    return (os.environ.get("BLOCKWISE_DEMO_DATE")
+            or (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d"))
 
 
 def square_aoi(lat, lon, size_m):
@@ -177,7 +181,10 @@ def get_plot(location, aoi, shape_label, date=None, use_cache=True,
     cache filename (e.g. "1000m_square", "600m_circle", "polygon_a1b2c3") -
     a live call is an async job polled every 3s, up to ~2 minutes.
     """
-    CACHE.mkdir(exist_ok=True)
+    try:
+        CACHE.mkdir(exist_ok=True)
+    except OSError:
+        pass          # read-only FS on Vercel; a pre-warmed cache still reads
     date = date or previous_day()
     key = re.sub(r"[^A-Za-z0-9]+", "_", location).strip("_")
     path = CACHE / f"{key}_{shape_label}_g{granularity}_{date}.json"
@@ -191,7 +198,10 @@ def get_plot(location, aoi, shape_label, date=None, use_cache=True,
         out["location"] = location
         out["shape_label"] = shape_label
         out["date"] = date
-        path.write_text(json.dumps(out, indent=2))
+        try:
+            path.write_text(json.dumps(out, indent=2))
+        except OSError:
+            pass      # read-only FS on Vercel; cache is read-only there
     return out
 
 

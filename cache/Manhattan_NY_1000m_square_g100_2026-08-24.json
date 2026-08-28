@@ -1,0 +1,14 @@
+{
+  "n_tiles": 77,
+  "peak_c": 28.323964935064932,
+  "low_c": 18.360889610389613,
+  "daily_mean_c": 23.14534805194805,
+  "peak_spread": 1.4542000000000002,
+  "peak_range": [
+    27.9014,
+    29.3556
+  ],
+  "location": "Manhattan, NY",
+  "shape_label": "1000m_square",
+  "date": "2026-08-24"
+}

@@ -1,0 +1,14 @@
+{
+  "n_tiles": 104,
+  "peak_c": 30.597976923076924,
+  "low_c": 15.364989423076924,
+  "daily_mean_c": 22.90811442307692,
+  "peak_spread": 0.2079999999999984,
+  "peak_range": [
+    30.4678,
+    30.6758
+  ],
+  "location": "Denver, CO",
+  "shape_label": "800m_square",
+  "date": "2026-08-25"
+}

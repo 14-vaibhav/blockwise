@@ -1,0 +1,14 @@
+{
+  "n_tiles": 90,
+  "peak_c": 38.57,
+  "low_c": 26.060000000000002,
+  "daily_mean_c": 32.95630444444444,
+  "peak_spread": 0.0,
+  "peak_range": [
+    38.57,
+    38.57
+  ],
+  "location": "Austin, TX",
+  "shape_label": "1000m_square",
+  "date": "2026-08-25"
+}

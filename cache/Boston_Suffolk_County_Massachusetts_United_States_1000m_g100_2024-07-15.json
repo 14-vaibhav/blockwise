@@ -1,0 +1,14 @@
+{
+  "n_tiles": 102,
+  "peak_c": 35.23927647058824,
+  "low_c": 22.07650294117647,
+  "daily_mean_c": 28.246260784313726,
+  "peak_spread": 1.8326999999999956,
+  "peak_range": [
+    34.8832,
+    36.7159
+  ],
+  "location": "Boston, Suffolk County, Massachusetts, United States",
+  "size_m": 1000,
+  "date": "2024-07-15"
+}

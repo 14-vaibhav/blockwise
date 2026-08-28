@@ -13,9 +13,7 @@ Roof albedo, paving type and tree species are still assumptions. Say so.
 """
 
 import json
-import os
 import pathlib
-import tempfile
 import time
 
 import numpy as np
@@ -24,10 +22,9 @@ import requests
 import engine as E
 
 OVERPASS = "https://overpass-api.de/api/interpreter"
-# Vercel's filesystem is read-only outside /tmp - fall back there when
-# deployed (VERCEL is set by the platform at runtime).
-CACHE = (pathlib.Path(tempfile.gettempdir()) / "blockwise_cache"
-         if os.environ.get("VERCEL") else pathlib.Path("cache"))
+# Relative to this file, not the process cwd - see fgdata.py's CACHE for why,
+# and get_site()'s try/except for why a read-only FS (Vercel) is fine too.
+CACHE = pathlib.Path(__file__).resolve().parent / "cache"
 
 # Overpass's usage policy rejects anonymous requests with no User-Agent
 # (HTTP 406). A descriptive one identifying the app is required, not optional.
@@ -185,7 +182,10 @@ def rasterise(elements, lat, lon, size_m, n=E.GRID_N, fill="concrete"):
 
 def get_site(location, lat, lon, size_m=E.PLOT_M, use_cache=True):
     """Cached OSM land cover for a named location."""
-    CACHE.mkdir(exist_ok=True)
+    try:
+        CACHE.mkdir(exist_ok=True)
+    except OSError:
+        pass          # read-only FS on Vercel; a pre-warmed cache still reads
     key = location.replace(", ", "_").replace(" ", "")
     path = CACHE / f"osm_{key}_{size_m}m_{E.GRID_N}.json"
 
@@ -204,7 +204,10 @@ def get_site(location, lat, lon, size_m=E.PLOT_M, use_cache=True):
         "mix": {str(k): int(v) for k, v in zip(keys, counts)},
         "source": "OpenStreetMap contributors, ODbL",
     }
-    path.write_text(json.dumps({"grid": grid.tolist(), "stats": stats}))
+    try:
+        path.write_text(json.dumps({"grid": grid.tolist(), "stats": stats}))
+    except OSError:
+        pass          # read-only FS on Vercel; cache is read-only there
     return grid, stats
 
 

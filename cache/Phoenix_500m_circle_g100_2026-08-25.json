@@ -1,0 +1,14 @@
+{
+  "n_tiles": 68,
+  "peak_c": 42.02973382352941,
+  "low_c": 32.58953823529412,
+  "daily_mean_c": 37.70197352941176,
+  "peak_spread": 0.008499999999997954,
+  "peak_range": [
+    42.0276,
+    42.0361
+  ],
+  "location": "Phoenix",
+  "shape_label": "500m_circle",
+  "date": "2026-08-25"
+}
